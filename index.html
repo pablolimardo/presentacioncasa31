@@ -89,6 +89,7 @@ footer b{color:var(--green)}
   <span class="tag">Arduino</span><span class="tag">Domótica</span><span class="tag">Equipo de 4</span>
   <h1>Maqueta <span>domótica</span>: plan para llegar a la entrega</h1>
   <p class="lead">Cuatro personas, cuatro roles y un objetivo: que el día de la entrega la maqueta funcione y todos sepan explicar su parte. Este plan te dice qué hacer, en qué orden y cómo comprobar que quedó bien.</p>
+  <p id="countdown" style="font-family:var(--head);font-size:clamp(16px,3vw,22px);color:var(--amber);margin:8px 0 18px"></p>
   <div class="card" style="max-width:720px">
     <b>Avance del equipo</b>
     <div class="pbar"><i id="pfill"></i></div>
@@ -177,14 +178,15 @@ footer b{color:var(--green)}
 
 <section id="plan">
   <h2><small>EL PLAN</small>De hoy a la entrega</h2>
-  <p>Ajustalo a los días de clase que tengan. Lo importante es el orden.</p>
+  <p>Cada hito tiene fecha límite. Si una clase cae otro día, la fecha se mantiene.</p>
   <div class="tablewrap"><table>
-    <tr><th>Momento</th><th>Qué se hace</th><th>Se termina cuando...</th></tr>
-    <tr><td><b>Hoy y fin de semana</b></td><td>Cada uno avanza con su rol (tareas para casa). Cableado puede armar el circuito en el simulador Wokwi si no tiene los componentes en casa.</td><td>El circuito está probado por tramos y el código compila con los arreglos obligatorios</td></tr>
-    <tr><td><b>Clase 1</b></td><td>Armar el circuito completo, cargar el código y hacer la primera ronda de pruebas.</td><td>Todo prende, abre y cierra, aunque queden fallas por resolver</td></tr>
-    <tr><td><b>Clase 2</b></td><td>Resolver fallas, calibrar el sensor y montar todo en la maqueta.</td><td>El checklist de pruebas está completo y la maqueta está armada</td></tr>
-    <tr><td><b>Clase 3 / ensayo</b></td><td>Ficha técnica lista, ensayo de la demo y video de respaldo.</td><td>Hicieron la demo completa dos veces sin trabarse</td></tr>
-    <tr><td><b>Entrega</b></td><td>Demo y entrega de la ficha.</td><td>¡Misión cumplida!</td></tr>
+    <tr><th>Fecha</th><th>Qué se hace</th><th>Se termina cuando...</th></tr>
+    <tr><td><b>Viernes 30/10 (hoy)</b></td><td>Repartir roles, hacer los 3 arreglos obligatorios del código y empezar el circuito. Cada uno se lleva su tarea para casa.</td><td>Cada integrante sabe qué tiene que hacer y el código compila</td></tr>
+    <tr><td><b>Fin de semana (31/10 y 1/11)</b></td><td>Tareas para casa. Cableado puede armar el circuito en el simulador Wokwi si no tiene los componentes.</td><td>El circuito está probado por tramos y el código tiene el antirrebote y el Serial</td></tr>
+    <tr><td><b>Lunes 2/11</b></td><td>Circuito completo armado, código cargado y primera ronda de pruebas.</td><td>Todo prende, abre y cierra, aunque queden fallas por resolver</td></tr>
+    <tr><td><b>Martes 3 y miércoles 4/11</b></td><td>Resolver fallas, calibrar el sensor y montar todo en la maqueta.</td><td>El checklist de pruebas está completo y la maqueta está armada. <b>El miércoles es el último día para tocar el código.</b></td></tr>
+    <tr><td><b>Jueves 5/11</b></td><td>Ficha técnica lista, ensayo de la demo y video de respaldo.</td><td>Hicieron la demo completa dos veces sin trabarse y el kit de emergencia está armado</td></tr>
+    <tr><td><b>Viernes 6/11</b></td><td>Demo y entrega de la ficha.</td><td>¡Misión cumplida!</td></tr>
   </table></div>
 </section>
 
@@ -361,6 +363,14 @@ if (estadoBoton != estadoAnteriorBoton &amp;&amp; millis() - ultimoCambio &gt; 3
     $('#ptext').textContent=n+' de '+all.length+' tareas y pruebas completadas'+(n===all.length?' · ¡Todo listo para la entrega!':'');
   }
   prog();
+
+  /* cuenta regresiva hasta la entrega: viernes 6 de noviembre de 2026 */
+  var hoy=new Date();hoy.setHours(0,0,0,0);
+  var entrega=new Date(2026,10,6);
+  var dias=Math.round((entrega-hoy)/86400000);
+  $('#countdown').textContent=dias>1?'Entrega: viernes 6 de noviembre · faltan '+dias+' días':
+    dias===1?'Entrega: viernes 6 de noviembre · ¡falta 1 día!':
+    dias===0?'¡Hoy es la entrega! Mucha suerte':'La fecha de entrega (6 de noviembre) ya pasó';
 })();
 </script>
 </body>
