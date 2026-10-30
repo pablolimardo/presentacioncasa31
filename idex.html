@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maqueta domótica · Plan de equipo · Expotécnica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0e27; --card:rgba(255,255,255,.05); --line:rgba(255,255,255,.12);
+  --green:#00ff88; --cyan:#00d9ff; --amber:#ffc83d; --red:#ff4d6d; --text:#e6e9f5; --muted:#9aa3c7;
+  --mono:'JetBrains Mono',ui-monospace,Consolas,monospace;
+  --head:'Orbitron','Segoe UI',system-ui,sans-serif;
+  --body:'IBM Plex Sans','Segoe UI',system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;background:radial-gradient(1200px 600px at 10% -10%,#16205a 0%,transparent 60%),var(--bg);color:var(--text);font-family:var(--body);line-height:1.65;font-size:17px}
+#progress{position:fixed;top:0;left:0;height:4px;width:0;background:linear-gradient(90deg,var(--green),var(--cyan));z-index:100}
+nav{position:sticky;top:0;z-index:50;background:rgba(10,14,39,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .in{max-width:1000px;margin:auto;padding:10px 20px;display:flex;gap:4px;flex-wrap:wrap;align-items:center}
+nav a{color:var(--muted);text-decoration:none;font-size:13px;padding:5px 10px;border-radius:999px;border:1px solid transparent;font-weight:500}
+nav a:hover{color:var(--green);border-color:var(--line)}
+nav .brand{font-family:var(--head);color:var(--green);font-size:13px;margin-right:auto;letter-spacing:1px}
+header.hero{max-width:1000px;margin:auto;padding:64px 20px 24px}
+.tag{display:inline-block;font-family:var(--mono);font-size:12px;color:var(--green);border:1px solid var(--green);padding:3px 10px;border-radius:999px;margin:0 6px 8px 0}
+h1{font-family:var(--head);font-weight:800;font-size:clamp(26px,5.6vw,46px);line-height:1.12;margin:10px 0 14px;color:#fff}
+h1 span{color:var(--green)}
+.lead{color:var(--muted);max-width:720px;font-size:19px}
+main{max-width:1000px;margin:auto;padding:0 20px 80px}
+section{margin-top:52px}
+h2{font-family:var(--head);font-size:clamp(20px,3.4vw,27px);color:var(--green);margin:0 0 6px}
+h2 small{display:block;font-family:var(--mono);font-size:12px;color:var(--cyan);letter-spacing:2px;margin-bottom:4px}
+h3{font-family:var(--head);font-size:17px;color:#fff;margin:20px 0 8px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 22px;backdrop-filter:blur(8px);margin:14px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.goal,.analogy,.check,.warn{padding:8px 14px;border-radius:0 10px 10px 0;margin:12px 0}
+.goal{border-left:3px solid var(--green);background:rgba(0,255,136,.07)} .goal b{color:var(--green)}
+.analogy{border-left:3px solid var(--cyan);background:rgba(0,217,255,.07)} .analogy b{color:var(--cyan)}
+.check{border-left:3px solid var(--amber);background:rgba(255,200,61,.07)} .check b{color:var(--amber)}
+.warn{border-left:3px solid var(--red);background:rgba(255,77,109,.08)} .warn b{color:var(--red)}
+code{font-family:var(--mono);font-size:.92em;background:rgba(255,255,255,.08);padding:1px 6px;border-radius:6px;color:var(--green)}
+pre{margin:10px 0;background:#070a1c;border:1px solid var(--line);border-radius:12px;padding:14px;overflow-x:auto;font-family:var(--mono);font-size:13.5px;line-height:1.5;color:#d7ffe9}
+pre code{background:none;padding:0;color:inherit;font-size:inherit}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:15px}
+th,td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}
+th{background:rgba(0,255,136,.1);color:var(--green);font-family:var(--head);font-size:12px;letter-spacing:.5px}
+.tablewrap{overflow-x:auto}
+ul.todo{list-style:none;padding:0;margin:8px 0}
+ul.todo li{margin:7px 0}
+ul.todo label{display:flex;gap:10px;align-items:flex-start;cursor:pointer}
+ul.todo input[type=checkbox],td input[type=checkbox]{accent-color:#00ff88;width:19px;height:19px;flex:none;margin-top:4px}
+ul.todo input:checked + span{color:var(--muted);text-decoration:line-through}
+.rolehead{display:flex;gap:12px;align-items:center}
+.ico{font-size:30px;width:52px;height:52px;border-radius:14px;display:grid;place-items:center;background:rgba(0,255,136,.12);border:1px solid var(--green);flex:none}
+.rolehead h3{margin:0}
+.rolehead small{color:var(--muted)}
+.pbar{height:12px;background:rgba(255,255,255,.1);border-radius:999px;overflow:hidden;margin:8px 0}
+.pbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--green),var(--cyan));transition:width .4s}
+input.txt,textarea.txt{width:100%;background:#070a1c;color:var(--text);border:1px solid var(--line);border-radius:8px;padding:7px 10px;font-family:var(--body);font-size:15px}
+textarea.txt{min-height:60px;resize:vertical}
+input.txt:focus,textarea.txt:focus{outline:2px solid var(--cyan)}
+details{margin:8px 0;border:1px solid var(--line);border-radius:12px;padding:9px 14px;background:rgba(255,255,255,.03)}
+summary{cursor:pointer;font-weight:600;color:var(--cyan)}
+button.btn{font-family:var(--head);font-size:12px;letter-spacing:1px;background:var(--green);color:#04210f;border:0;border-radius:10px;padding:10px 16px;cursor:pointer;font-weight:800}
+button.btn:hover{filter:brightness(1.15)}
+footer{border-top:1px solid var(--line);padding:30px 20px;text-align:center;color:var(--muted);font-size:14px}
+footer b{color:var(--green)}
+@media print{#progress,nav,button.btn{display:none}body{background:#fff;color:#000}.card,details{border-color:#999}th{color:#000;background:#eee}code,pre{color:#000;background:#f2f2f2}}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<nav><div class="in">
+  <span class="brand">EXPOTÉCNICA · EQUIPO</span>
+  <a href="#mision">Misión</a>
+  <a href="#roles">Roles</a>
+  <a href="#plan">Plan</a>
+  <a href="#circuito">Circuito</a>
+  <a href="#pruebas">Pruebas</a>
+  <a href="#ficha">Ficha técnica</a>
+  <a href="#demo">Demo</a>
+  <a href="#kit">Kit</a>
+</div></nav>
+
+<header class="hero">
+  <span class="tag">Arduino</span><span class="tag">Domótica</span><span class="tag">Equipo de 4</span>
+  <h1>Maqueta <span>domótica</span>: plan para llegar a la entrega</h1>
+  <p class="lead">Cuatro personas, cuatro roles y un objetivo: que el día de la entrega la maqueta funcione y todos sepan explicar su parte. Este plan te dice qué hacer, en qué orden y cómo comprobar que quedó bien.</p>
+  <div class="card" style="max-width:720px">
+    <b>Avance del equipo</b>
+    <div class="pbar"><i id="pfill"></i></div>
+    <span id="ptext" style="font-family:var(--mono);font-size:14px;color:var(--muted)"></span>
+  </div>
+</header>
+
+<main>
+
+<section id="mision">
+  <h2><small>LA MISIÓN</small>Qué tiene que funcionar el día de la entrega</h2>
+  <div class="goal"><b>Regla de oro:</b> desde hoy no se agregan funciones nuevas. Primero se asegura que lo que ya hay funcione perfecto. Las mejoras son un premio extra si sobra tiempo.</div>
+  <div class="grid">
+    <div class="card"><b>La casa tiene que poder...</b>
+      <ul>
+        <li>Cambiar de escena de luces con un pulsador: toda la casa, solo el living, solo la pieza y solo el baño.</li>
+        <li>Apagar las luces sola a los 10 segundos.</li>
+        <li>Abrir y cerrar la puerta con un servo y otro pulsador.</li>
+        <li>Prender la luz exterior cuando hay poca luz.</li>
+      </ul></div>
+    <div class="card"><b>Y el equipo tiene que...</b>
+      <ul>
+        <li>Mostrar la maqueta funcionando en una demo de 3 minutos.</li>
+        <li>Entregar una ficha técnica de una hoja.</li>
+        <li>Saber explicar por qué el circuito y el código funcionan así.</li>
+        <li>Tener un plan B si algo falla ese día.</li>
+      </ul></div>
+  </div>
+</section>
+
+<section id="roles">
+  <h2><small>4 ROLES</small>Quién hace qué</h2>
+  <p>Cada uno es responsable de su parte, pero se ayudan entre todos. Tildá cada tarea cuando esté lista.</p>
+  <div class="grid">
+
+    <div class="card">
+      <div class="rolehead"><div class="ico">🔌</div><div><h3>Cableado y montaje</h3><small>Nombre: <input class="txt" style="width:150px;display:inline-block" data-k="n1" placeholder="escribí tu nombre"></small></div></div>
+      <ul class="todo">
+        <li><label><input type="checkbox" class="cnt" data-k="h1"><span>Armar el circuito en protoboard por tramos: un LED, probarlo, y recién después seguir con el resto.</span></label></li>
+        <li><label><input type="checkbox" class="cnt" data-k="h2"><span>Conectar el LED del baño al pin 9 (no al 1).</span></label></li>
+        <li><label><input type="checkbox" class="cnt" data-k="h3"><span>Completar y corregir la tabla pin → componente de la sección Circuito.</span></label></li>
+        <li><label><input type="checkbox" class="cnt" data-k="h4"><span>Probar el servo. Si la placa se reinicia o tiembla, agregar el capacitor.</span></label></li>
+        <li><label><input type="checkbox" class="cnt" data-k="h5"><span>Montar todo en la maqueta con cables ordenados y etiquetados.</span></label></li>
+        <li><label><input type="checkbox" class="cnt" data-k="h6"><span>Sacar fotos de cada etapa para la ficha técnica.</span></label></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="rolehead"><div class="ico">💻</div><div><h3>Código</h3><small>Nombre: <input class="txt" style="width:150px;display:inline-block" data-k="n2" placeholder="escribí tu nombre"></small></div></div>
+      <ul class="todo">
+        <li><label><input type="checkbox" class="cnt" data-k="s1"><span>Hacer los 3 arreglos obligatorios (ver sección Código).</span></label></li>
+        <li><label><input type="checkbox" class="cnt" data-k="s2"><span>Cargar el código en la placa y confirmar que compila y corre.</span></label></li>
+        <li><label><input type="checkbox" class="cnt" data-k="s3"><span>Reto 1: agregar antirrebote a los dos pulsadores.</span></label></li>
+        <li><label><input type="checkbox" class="cnt" data-k="s4"><span>Reto 2: mostrar por Serial la escena activa y el valor del sensor de luz.</span></label></li>
+        <li><label><input type="checkbox" class="cnt" data-k="s5"><span>Calibrar el umbral del sensor con la luz real del aula.</span></label></li>
+        <li><label><input type="checkbox" class="cnt" data-k="s6"><span>Comentar el código: cada bloque explica qué hace.</span></label></li>
+        <li><label><input type="checkbox" class="cnt" data-k="s7"><span>Reto extra: reemplazar los <code>if</code> de las escenas por un arreglo y una función.</span></label></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="rolehead"><div class="ico">🧪</div><div><h3>Pruebas y documentación</h3><small>Nombre: <input class="txt" style="width:150px;display:inline-block" data-k="n3" placeholder="escribí tu nombre"></small></div></div>
+      <ul class="todo">
+        <li><label><input type="checkbox" class="cnt" data-k="p1"><span>Completar el checklist de pruebas de la sección Pruebas.</span></label></li>
+        <li><label><input type="checkbox" class="cnt" data-k="p2"><span>Avisar cada falla a Cableado o a Código, según corresponda.</span></label></li>
+        <li><label><input type="checkbox" class="cnt" data-k="p3"><span>Repetir las pruebas después de cada arreglo.</span></label></li>
+        <li><label><input type="checkbox" class="cnt" data-k="p4"><span>Completar la ficha técnica de una hoja.</span></label></li>
+        <li><label><input type="checkbox" class="cnt" data-k="p5"><span>Armar la lista de materiales con cantidades.</span></label></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="rolehead"><div class="ico">🎯</div><div><h3>Coordinación y demo</h3><small>Nombre: <input class="txt" style="width:150px;display:inline-block" data-k="n4" placeholder="escribí tu nombre"></small></div></div>
+      <ul class="todo">
+        <li><label><input type="checkbox" class="cnt" data-k="c1"><span>Llevar el tablero: quién hace qué y qué falta. Cierre de 5 minutos al final de cada clase.</span></label></li>
+        <li><label><input type="checkbox" class="cnt" data-k="c2"><span>Confirmar con los profes el día y la hora de la entrega.</span></label></li>
+        <li><label><input type="checkbox" class="cnt" data-k="c3"><span>Completar el guion de la demo de 3 minutos (sección Demo).</span></label></li>
+        <li><label><input type="checkbox" class="cnt" data-k="c4"><span>Ensayar la demo completa dos veces, con cronómetro.</span></label></li>
+        <li><label><input type="checkbox" class="cnt" data-k="c5"><span>Grabar un video de respaldo de la maqueta funcionando.</span></label></li>
+        <li><label><input type="checkbox" class="cnt" data-k="c6"><span>Armar el kit de emergencia (sección Kit).</span></label></li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section id="plan">
+  <h2><small>EL PLAN</small>De hoy a la entrega</h2>
+  <p>Ajustalo a los días de clase que tengan. Lo importante es el orden.</p>
+  <div class="tablewrap"><table>
+    <tr><th>Momento</th><th>Qué se hace</th><th>Se termina cuando...</th></tr>
+    <tr><td><b>Hoy y fin de semana</b></td><td>Cada uno avanza con su rol (tareas para casa). Cableado puede armar el circuito en el simulador Wokwi si no tiene los componentes en casa.</td><td>El circuito está probado por tramos y el código compila con los arreglos obligatorios</td></tr>
+    <tr><td><b>Clase 1</b></td><td>Armar el circuito completo, cargar el código y hacer la primera ronda de pruebas.</td><td>Todo prende, abre y cierra, aunque queden fallas por resolver</td></tr>
+    <tr><td><b>Clase 2</b></td><td>Resolver fallas, calibrar el sensor y montar todo en la maqueta.</td><td>El checklist de pruebas está completo y la maqueta está armada</td></tr>
+    <tr><td><b>Clase 3 / ensayo</b></td><td>Ficha técnica lista, ensayo de la demo y video de respaldo.</td><td>Hicieron la demo completa dos veces sin trabarse</td></tr>
+    <tr><td><b>Entrega</b></td><td>Demo y entrega de la ficha.</td><td>¡Misión cumplida!</td></tr>
+  </table></div>
+</section>
+
+<section id="circuito">
+  <h2><small>HARDWARE</small>Circuito y riesgos</h2>
+  <h3>Tabla pin → componente</h3>
+  <div class="tablewrap"><table>
+    <tr><th>Pin</th><th>Componente</th><th>Cómo se conecta</th></tr>
+    <tr><td><code>9</code></td><td>LED del baño</td><td>Pin → resistencia 220 Ω → pata larga del LED. Pata corta a GND. <b>Antes estaba en el pin 1: cambiarlo.</b></td></tr>
+    <tr><td><code>2</code></td><td>LED del living 1</td><td>Igual: resistencia 220 Ω y LED a GND</td></tr>
+    <tr><td><code>3</code></td><td>LED del living 2</td><td>Igual</td></tr>
+    <tr><td><code>4</code></td><td>LED de la pieza</td><td>Igual</td></tr>
+    <tr><td><code>5</code></td><td>LED exterior</td><td>Igual</td></tr>
+    <tr><td><code>8</code></td><td>Pulsador de luces</td><td>Un lado al pin 8 y el otro a GND (el código usa <code>INPUT_PULLUP</code>)</td></tr>
+    <tr><td><code>6</code></td><td>Pulsador de puerta</td><td>Un lado al pin 6 y el otro a GND</td></tr>
+    <tr><td><code>7</code></td><td>Servo de la puerta</td><td>Señal al pin 7, cable rojo a 5V, cable marrón o negro a GND</td></tr>
+    <tr><td><code>A0</code></td><td>Sensor de luz</td><td>Salida analógica (AO) al A0, VCC a 5V, GND a GND</td></tr>
+    <tr><td><code>10</code></td><td>Buzzer (opcional)</td><td>Un terminal al pin 10 y el otro a GND</td></tr>
+  </table></div>
+
+  <h3>4 problemas típicos de la maqueta real</h3>
+  <div class="grid">
+    <div class="card"><div class="warn"><b>1. El pin 1 es especial</b></div>Es el TX de la placa, el mismo que usa el cable USB. Con un LED ahí puede fallar la carga del código y no podés usar <code>Serial</code>. <b>Solución:</b> usar el pin 9.</div>
+    <div class="card"><div class="warn"><b>2. El servo reinicia la placa</b></div>Si al mover la puerta la placa se reinicia o el servo tiembla, falta corriente. <b>Solución:</b> un capacitor de 100 a 470 µF entre 5V y GND, o alimentar el servo con una fuente aparte (con GND en común con la placa).</div>
+    <div class="card"><div class="warn"><b>3. El pulsador cuenta doble</b></div>En la placa real, un toque puede leerse como dos (rebote). <b>Solución:</b> el antirrebote, que es el Reto 1 del código.</div>
+    <div class="card"><div class="warn"><b>4. El sensor de luz no anda como en el simulador</b></div>El valor 300 depende de la luz del aula, y algunos módulos dan el valor al revés. <b>Solución:</b> medirlo con <code>Serial</code> y ajustar el umbral.</div>
+  </div>
+</section>
+
+<section id="codigo">
+  <h2><small>SOFTWARE</small>Arreglos y retos del código</h2>
+  <h3>3 arreglos obligatorios</h3>
+  <ol>
+    <li>Agregar arriba de todo: <code>#include &lt;Servo.h&gt;</code></li>
+    <li>Cambiar el nombre de la variable <code>baño</code> por <code>bano</code> (el compilador puede fallar con la ñ).</li>
+    <li>Cambiar el pin del baño: <code>int bano = 9;</code></li>
+  </ol>
+
+  <h3>Reto 1: antirrebote</h3>
+  <p>Idea: no aceptar un cambio del botón si pasaron menos de 30 milisegundos desde el anterior cambio. Necesitás una variable nueva que guarde cuándo fue el último cambio.</p>
+  <pre><code>unsigned long ultimoCambio = 0;   // variable global nueva
+
+// adentro de loop(), al leer el botón:
+if (estadoBoton != estadoAnteriorBoton &amp;&amp; millis() - ultimoCambio &gt; 30) {
+  ultimoCambio = millis();
+  // acá va lo que ya hacías cuando cambia el botón
+}</code></pre>
+  <div class="check"><b>Pensalo:</b> hay dos botones. ¿Alcanza con una sola variable <code>ultimoCambio</code> o necesitás una para cada botón?</div>
+
+  <h3>Reto 2: monitor serie</h3>
+  <ul>
+    <li>En <code>setup()</code> agregá <code>Serial.begin(9600);</code></li>
+    <li>Cuando cambie la escena, mostrá cuál es con <code>Serial.println(opcion);</code></li>
+    <li>Para calibrar el sensor, mostrá <code>Serial.println(luz);</code> y mirá cuánto vale con luz y tapándolo. El umbral va en el medio.</li>
+  </ul>
+
+  <h3>Reto 3 (extra): menos código repetido</h3>
+  <p>Hoy cada escena tiene sus propios <code>digitalWrite</code>. ¿Se puede guardar los pines en un arreglo <code>int luces[] = {bano, living1, living2, pieza};</code> y usar un <code>for</code> para apagarlos? Si lo lográs, <code>apagarLuces()</code> queda de dos líneas.</p>
+</section>
+
+<section id="pruebas">
+  <h2><small>CONTROL DE CALIDAD</small>Checklist de pruebas</h2>
+  <p>Probá una por una y tildá las que pasan. En las que fallan, anotá qué pasó para poder arreglarlo.</p>
+  <div class="tablewrap"><table id="tests">
+    <tr><th>✔</th><th>Prueba</th><th>Resultado esperado</th><th>Si falló, qué pasó</th></tr>
+  </table></div>
+</section>
+
+<section id="ficha">
+  <h2><small>DOCUMENTACIÓN</small>Ficha técnica (1 hoja)</h2>
+  <p>Completen los campos y apretá el botón para imprimir o guardar como PDF. Lo que escribas queda guardado en tu navegador.</p>
+  <div class="card" id="fichabox">
+    <b>Nombre del proyecto</b><input class="txt" data-k="f1" placeholder="Por ejemplo: Casa inteligente">
+    <br><br><b>Integrantes</b><input class="txt" data-k="f2" placeholder="Los 4 nombres">
+    <br><br><b>¿Qué hace?</b><textarea class="txt" data-k="f3" placeholder="En 3 o 4 líneas: qué problema resuelve y cómo se usa"></textarea>
+    <br><b>Componentes y cantidades</b><textarea class="txt" data-k="f4" placeholder="Arduino Uno x1, LEDs x5, resistencias 220 Ω x5, pulsadores x2, servo x1, sensor de luz x1..."></textarea>
+    <br><b>Cómo funciona el código</b><textarea class="txt" data-k="f5" placeholder="Explicá con tus palabras: escenas, autoapagado, puerta, luz exterior"></textarea>
+    <br><b>Qué aprendimos y qué mejoraríamos</b><textarea class="txt" data-k="f6" placeholder="Qué fue lo más difícil y qué le agregarían con más tiempo"></textarea>
+    <br><div class="check"><b>No te olvides:</b> pegar al lado el diagrama del circuito y una o dos fotos de la maqueta.</div>
+    <button class="btn" onclick="window.print()">IMPRIMIR FICHA</button>
+  </div>
+</section>
+
+<section id="demo">
+  <h2><small>EL GRAN DÍA</small>Guion de la demo (3 minutos)</h2>
+  <p>Cada integrante tiene una parte. Completen quién hace cada una y ensáyenla con cronómetro.</p>
+  <div class="tablewrap"><table>
+    <tr><th>Tiempo</th><th>Quién</th><th>Qué dice o hace</th></tr>
+    <tr><td>0:00 a 0:20</td><td><input class="txt" data-k="d1" placeholder="Nombre"></td><td>Presenta el proyecto: qué es, para qué sirve y quiénes lo hicieron.</td></tr>
+    <tr><td>0:20 a 1:00</td><td><input class="txt" data-k="d2" placeholder="Nombre"></td><td>Explica el circuito: qué componentes tiene y cómo se conectan los pulsadores, el servo y el sensor.</td></tr>
+    <tr><td>1:00 a 1:40</td><td><input class="txt" data-k="d3" placeholder="Nombre"></td><td>Explica el código: cómo cambia de escena, cómo se apagan las luces solas y cómo decide la luz exterior.</td></tr>
+    <tr><td>1:40 a 2:40</td><td><input class="txt" data-k="d4" placeholder="Nombre"></td><td>Demo en vivo: recorre las 4 escenas, abre y cierra la puerta y tapa el sensor para prender la luz exterior.</td></tr>
+    <tr><td>2:40 a 3:00</td><td><input class="txt" data-k="d5" placeholder="Nombre"></td><td>Cierra: qué aprendieron, qué mejorarían y agradece.</td></tr>
+  </table></div>
+
+  <h3>Preguntas que les pueden hacer</h3>
+  <p>Ensayen las respuestas. Tocá cada pregunta para ver una pista.</p>
+  <details><summary>¿Por qué los pulsadores usan INPUT_PULLUP?</summary><p>Activa una resistencia interna del Arduino. Así el pin lee HIGH cuando el botón está suelto y LOW cuando se aprieta, y el botón solo necesita conectarse a GND, sin resistencia externa.</p></details>
+  <details><summary>¿Para qué sirve la resistencia de 220 Ω en cada LED?</summary><p>Limita la corriente que pasa por el LED para que no se queme.</p></details>
+  <details><summary>¿Qué es millis() y por qué no usaron delay()?</summary><p><code>millis()</code> cuenta los milisegundos desde que arrancó la placa. Sirve para medir tiempo sin frenar el programa, como hace <code>delay()</code>. Así el sistema sigue leyendo botones y sensor mientras espera para apagar las luces.</p></details>
+  <details><summary>¿Cómo sabe el sistema que está oscuro?</summary><p>Lee el sensor con <code>analogRead</code>, que da un valor entre 0 y 1023. Si el valor es menor al umbral (300), considera que hay poca luz y prende la luz exterior.</p></details>
+  <details><summary>¿Qué cambiarían si tuvieran una semana más?</summary><p>Ideas: una alarma con buzzer si la puerta queda abierta, un sensor de temperatura con ventilador, una pantalla LCD que muestre la escena activa o control desde el celular.</p></details>
+</section>
+
+<section id="kit">
+  <h2><small>PLAN B</small>Kit de emergencia</h2>
+  <p>El día de la entrega puede fallar un cable, una placa o la compu. Con esto a mano, no se frena nada.</p>
+  <ul class="todo">
+    <li><label><input type="checkbox" class="cnt" data-k="k1"><span>Cable USB de repuesto y fuente o batería.</span></label></li>
+    <li><label><input type="checkbox" class="cnt" data-k="k2"><span>LEDs y resistencias de repuesto.</span></label></li>
+    <li><label><input type="checkbox" class="cnt" data-k="k3"><span>Cables jumper de repuesto y cinta aisladora.</span></label></li>
+    <li><label><input type="checkbox" class="cnt" data-k="k4"><span>El código guardado en la compu, en un pendrive y en la nube.</span></label></li>
+    <li><label><input type="checkbox" class="cnt" data-k="k5"><span>Video de respaldo de la maqueta funcionando.</span></label></li>
+    <li><label><input type="checkbox" class="cnt" data-k="k6"><span>El proyecto en Wokwi abierto, por si la maqueta falla.</span></label></li>
+    <li><label><input type="checkbox" class="cnt" data-k="k7"><span>La ficha técnica impresa.</span></label></li>
+  </ul>
+</section>
+
+</main>
+
+<footer>
+  <b>Prof. Pablo Limardo – ACPI</b><br>
+  Escuela Industrial N° 9 "15 de Noviembre" · El Calafate, Santa Cruz
+</footer>
+
+<script>
+(function(){
+  var $=function(s){return document.querySelector(s)};
+  function load(k){try{return localStorage.getItem(k)}catch(e){return null}}
+  function save(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+
+  window.addEventListener('scroll',function(){
+    var h=document.documentElement;
+    $('#progress').style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';
+  });
+
+  /* checklist de pruebas */
+  var T=[
+    ['Escena 1: primera pulsación del botón de luces','Se encienden baño, living 1, living 2 y pieza'],
+    ['Escena 2: segunda pulsación','Se encienden solo los dos LEDs del living'],
+    ['Escena 3: tercera pulsación','Se enciende solo la pieza'],
+    ['Escena 4: cuarta pulsación','Se enciende solo el baño'],
+    ['Quinta pulsación','Vuelve a la escena 1 (toda la casa)'],
+    ['Autoapagado: no tocar nada 10 segundos','Se apagan todas las luces interiores solas'],
+    ['Botón de puerta: primera pulsación','El servo abre la puerta (90°)'],
+    ['Botón de puerta: segunda pulsación','El servo cierra la puerta (0°)'],
+    ['Un toque en cada botón (20 veces seguidas)','Cada toque hace una sola acción, sin saltos'],
+    ['Tapar el sensor de luz','Se enciende la luz exterior'],
+    ['Iluminar el sensor de luz','Se apaga la luz exterior'],
+    ['Usar luces, puerta y sensor a la vez','La placa no se reinicia y todo responde'],
+    ['Desenchufar y volver a enchufar la placa','Arranca con la puerta cerrada y las luces apagadas']
+  ];
+  var tb=$('#tests');
+  T.forEach(function(t,i){
+    var tr=document.createElement('tr');
+    tr.innerHTML='<td><input type="checkbox" class="cnt" data-k="t'+i+'" aria-label="Prueba '+(i+1)+' aprobada"></td><td>'+t[0]+'</td><td>'+t[1]+'</td><td><input class="txt" data-k="tn'+i+'" placeholder="Anotá la falla"></td>';
+    tb.appendChild(tr);
+  });
+
+  /* guardado genérico */
+  Array.prototype.forEach.call(document.querySelectorAll('[data-k]'),function(el){
+    var key='exp_'+el.dataset.k;
+    var v=load(key);
+    if(el.type==='checkbox'){el.checked=v==='1'}else if(v!==null){el.value=v}
+    el.addEventListener('input',function(){save(key,el.type==='checkbox'?(el.checked?'1':'0'):el.value);prog()});
+    el.addEventListener('change',function(){save(key,el.type==='checkbox'?(el.checked?'1':'0'):el.value);prog()});
+  });
+
+  function prog(){
+    var all=Array.prototype.slice.call(document.querySelectorAll('input.cnt'));
+    var n=all.filter(function(b){return b.checked}).length;
+    $('#pfill').parentNode.style.display='';
+    $('#pfill').style.width=(n/all.length*100)+'%';
+    $('#ptext').textContent=n+' de '+all.length+' tareas y pruebas completadas'+(n===all.length?' · ¡Todo listo para la entrega!':'');
+  }
+  prog();
+})();
+</script>
+</body>
+</html>
